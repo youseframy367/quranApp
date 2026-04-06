@@ -47,14 +47,11 @@ export default function App() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   useEffect(() => {
-    const checkScreenSize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
+    const checkScreenSize = () => setIsMobile(window.innerWidth <= 768);
     window.addEventListener("resize", checkScreenSize);
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
-  // وظيفة مساعدة لتبديل المكونات حسب الشاشة
   const ResponsiveRoute = ({ mobile: MobileComp, desktop: DesktopComp }) => {
     return isMobile ? <MobileComp /> : <DesktopComp />;
   };
@@ -65,38 +62,49 @@ export default function App() {
         {/* الصفحة الرئيسية */}
         <Route path="/" element={<ResponsiveRoute mobile={StartBag} desktop={StartBagCom} />} />
         
-        {/* الخيارات */}
+        {/* الخيارات - دعم الرابطين */}
         <Route path="/AllOption" element={<ResponsiveRoute mobile={AllOption} desktop={AllOptionCom} />} />
         <Route path="/Select" element={<ResponsiveRoute mobile={AllOption} desktop={AllOptionCom} />} />
 
-        {/* القرآن والشيوخ */}
+        {/* القرآن والشيوخ - دعم كل المسميات */}
         <Route path="/chioh" element={<ResponsiveRoute mobile={ChiohChoise} desktop={ChiohChoiseCom} />} />
+        <Route path="/chiohCom" element={<ResponsiveRoute mobile={ChiohChoise} desktop={ChiohChoiseCom} />} />
         <Route path="/hafiz" element={<ResponsiveRoute mobile={Hafiz} desktop={QuranSelctCom} />} />
+        <Route path="/quranSelct" element={<ResponsiveRoute mobile={Hafiz} desktop={QuranSelctCom} />} />
         <Route path="/surah" element={<ResponsiveRoute mobile={ShowAiat} desktop={ShowAiatCom} />} />
+        <Route path="/showAiat" element={<ResponsiveRoute mobile={ShowAiat} desktop={ShowAiatCom} />} />
         <Route path="/audio" element={<ResponsiveRoute mobile={Audio} desktop={AudioCom} />} />
+        <Route path="/aiatAduo" element={<ResponsiveRoute mobile={Audio} desktop={AudioCom} />} />
         
         {/* الدروس والمحاضرات */}
         <Route path="/SelectLisson" element={<ResponsiveRoute mobile={SelectLison} desktop={ChiohSelctCom} />} />
+        <Route path="/chiohSelct" element={<ResponsiveRoute mobile={SelectLison} desktop={ChiohSelctCom} />} />
         <Route path="/ShowLisson" element={<ResponsiveRoute mobile={LessonsDoc} desktop={LessonsDocCom} />} />
+        <Route path="/lisonDoc" element={<ResponsiveRoute mobile={LessonsDoc} desktop={LessonsDocCom} />} />
         <Route path="/lesonAdio" element={<ResponsiveRoute mobile={LisonAudio} desktop={LisonVadioCom} />} />
+        <Route path="/vadio" element={<ResponsiveRoute mobile={LisonAudio} desktop={LisonVadioCom} />} />
         <Route path="/playlist" element={<ResponsiveRoute mobile={PlaylistPage} desktop={PlaylistPageCom} />} />
+        <Route path="/playList" element={<ResponsiveRoute mobile={PlaylistPage} desktop={PlaylistPageCom} />} />
 
         {/* ابتهالات وأذكار */}
         <Route path="/selectApthlat" element={<ResponsiveRoute mobile={ApthlatSelect} desktop={ApthlatSelectCom} />} />
+        <Route path="/apthlatSelct" element={<ResponsiveRoute mobile={ApthlatSelect} desktop={ApthlatSelectCom} />} />
         <Route path="/ApthlatLisson" element={<ResponsiveRoute mobile={ApthlatLison} desktop={ApthlatLisonCom} />} />
+        <Route path="/apthlatLison" element={<ResponsiveRoute mobile={ApthlatLison} desktop={ApthlatLisonCom} />} />
         <Route path="/selectAzcar" element={<ResponsiveRoute mobile={DuaList} desktop={DuaListCom} />} />
-        
-        {/* أذكار بـ ID (موبايل وكمبيوتر) */}
+        <Route path="/azkarSelct" element={<ResponsiveRoute mobile={DuaList} desktop={DuaListCom} />} />
         <Route path="/Azkar/:id" element={isMobile ? <AzkarShow /> : <AzkarShowCom />} />
         <Route path="/azkarShow/:d" element={isMobile ? <AzkarShow /> : <AzkarShowCom />} />
 
         {/* إذاعة وتنمية */}
         <Route path="/izaheSelect" element={<ResponsiveRoute mobile={IzahetQuran} desktop={IzahetSelctCom} />} />
+        <Route path="/azaheSelct" element={<ResponsiveRoute mobile={IzahetQuran} desktop={IzahetSelctCom} />} />
         <Route path="/azkarLison" element={<ResponsiveRoute mobile={AzkarLisson} desktop={AzahaLissonCom} />} />
+        <Route path="/azaheLison" element={<ResponsiveRoute mobile={AzkarLisson} desktop={AzahaLissonCom} />} />
         <Route path="/tanmia" element={<ResponsiveRoute mobile={Tanmaia} desktop={TanmaiaCom} />} />
         <Route path="/tanmiaLison" element={<ResponsiveRoute mobile={TanmiaLisson} desktop={TanmiaLissonCom} />} />
 
-        {/* يوتيوب وفيديوهات */}
+        {/* يوتيوب */}
         <Route path="/channelVideos/:channelId" element={<ChannelDetails />} />
         <Route path="/youtubeSelect/:category" element={<YoutubeSelect />} />
       </Routes>
