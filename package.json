@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://yousseframy367.github.io/quran2",
-
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
@@ -16,20 +15,19 @@
     "node-fetch": "^3.3.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-player": "^3.3.1",
+    "react-player": "^3.4.0",
     "react-router-dom": "^7.7.0",
     "react-scripts": "5.0.1",
     "web-vitals": "^5.0.3"
   },
-"scripts": {
-  "start": "react-scripts start",
-  "build": "react-scripts build",
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -d build",
-  "test": "react-scripts test",
-  "eject": "react-scripts eject"
-},
-
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "eslintConfig": {
     "extends": [
       "react-app",

@@ -61,7 +61,7 @@ const style = {
     cursor: "pointer"
   },
   activ: {
-    fontWeight: "700"
+    fontWeight: "560"
   }
 };
 
@@ -142,77 +142,96 @@ export default function QuranSelctCom() {
        
      
 
- <div style={{
+<div style={{
   margin: "2% 7%",
   display: "flex",
   alignItems: "center",
-  direction:"ltr",
-  height: "170px",
+  justifyContent: "space-around", // بيوزع المحتوى (النصوص يمين والصورة شمال)
+  height: "200px", // زودنا الطول شوية عشان الـ Grid بتاعك
   borderRadius: "23px",
   backgroundImage: `url(${votart}), linear-gradient(to bottom, #006754 , #87D1A4)`,
-  backgroundSize: "100% 100%",     // يخلي الـ vector يتمدد على قد حجم الكارد كله
+  backgroundSize: "cover",
   backgroundRepeat: "no-repeat",
-  backgroundPosition: "center bottom", // يتثبت من تحت عند 0px
-  padding: "20px",
+  backgroundPosition: "center",
+  padding: "0 60px", // مسافة داخلية من الجوانب
   position: "relative",
   overflow: "hidden",
-  color: "#fff"
+  color: "#fff",
+  boxShadow: "0px 15px 30px rgba(0, 50, 40, 0.3)" // الشادو اللي اتفقنا عليه
 }}>
+  
+  {/* الجزء الخاص بالنصوص (الشيخ والسورة) */}
+  <div style={{ 
+      display: "flex", 
+      zIndex: "10", 
+      direction: "rtl", 
+      alignItems: "center", 
+      gap: "30px" 
+  }}>
     
+    {/* السورة */}
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
+      <p style={{ margin: "0", fontSize: "24px", fontWeight: "700", fontFamily: "'Amiri', serif", whiteSpace: "nowrap" }}>
+        سورة {lastSurah ? lastSurah.arabic : arabicNames[0]}
+      </p>
+      <p style={{ fontSize: "14px", opacity: 0.9 }}>Ayah no. 1</p>
+    </div>
 
-        <div style={{ display: "flex", zIndex: "1000",direction:"rtl",gap:"40px",marginTop:"10px" }}>
+    {/* الخط الفاصل */}
+    <div style={{ height: "100px", width: "1.5px", background: "rgba(255,255,255,0.5)" }}></div>
 
-
-   <div style={{display:"flex",flexDirection:"column",justifyContent:"center",alignItems:"center",width:"25%"}}>
-           <p style={{ direction: 'rtl', margin: "10px 8px", fontSize: "20px", fontWeight: "700", fontFamily: "'Amiri', serif" ,whiteSpace: "nowrap"
-}}>
-  سورة {lastSurah ? lastSurah.arabic : arabicNames[0]}
-</p>
-            <p style={{ fontSize: "12px", marginLeft: "15px" }}>Ayah no. 1</p>
-
-            </div>
-
-<div style={{height:"150px",width:"2px",background:"#fff",margin:"10px"}}></div>
-
-
-            <div style={{display:"flex",flexDirection:"column",minWidth:"26%",justifyContent:"center",alignItems:"center"}}>
-<p style={{ marginTop: "10px",whiteSpace: "nowrap",fontSize:"24px",fontWeight:"700"
- }}>
-  الشيخ {JSON.parse(sessionStorage.getItem("selectedSheikh"))?.name}
-</p>
-            <p style={{ fontSize: "12px",marginTop:"-5px",whiteSpace: "nowrap"
- }}>Last Read</p>
-   <button
-              style={{
-                fontFamily: "Montserrat, sans-serif",
-                padding: "11px",
-                borderRadius: "30px",
-                border: "none",
-                backgroundColor: "#fff",
-                color: "#000",
-                width: "115px",
-                display: "flex",
-                alignItems: "center",
-                fontSize: "12px",
-                
-                cursor: "pointer"
-              }}
-              onClick={continueLastSurah}
-            >
-                 <ArrowForwardIcon style={{ marginLeft: "15px" }} />
-              Continue
-             
-            </button>
-            </div>
-         
-
-  </div>
-  <img style={{width:"250px",height:"250px",margin:"15px 10px 10px 40%"}}src={quranImg}></img>
+    {/* الشيخ والزرار */}
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "10px" }}>
+      <div>
+        <p style={{ margin: "0", fontSize: "28px", fontWeight: "700", whiteSpace: "nowrap" }}>
+          الشيخ {JSON.parse(sessionStorage.getItem("selectedSheikh"))?.name}
+        </p>
+        <p style={{ fontSize: "13px", opacity: 0.8, marginTop: "2px" }}>Last Read</p>
       </div>
-   
-
-    
-
+      
+      <button
+        style={{
+          fontFamily: "Montserrat, sans-serif",
+          padding: "10px 25px",
+          borderRadius: "30px",
+          border: "none",
+          backgroundColor: "#fff",
+          color: "#000",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: "14px",
+          fontWeight: "600",
+          cursor: "pointer",
+          gap: "10px",
+          transition: "0.3s"
+        }}
+        onClick={continueLastSurah}
+        onMouseOver={(e) => e.currentTarget.style.transform = "scale(1.05)"}
+        onMouseOut={(e) => e.currentTarget.style.transform = "scale(1)"}
+      >
+        <ArrowForwardIcon style={{ fontSize: "18px" }} />
+        Continue
+      </button>
+    </div>
+  </div>
+<div style={{width:"30%"}}/>
+  {/* صورة المصحف - معمولة بـ absolute عشان متزقش الكلام */}
+  <img 
+    src={quranImg} 
+    alt="Quran" 
+    style={{
+      position: "absolute",
+      right: "5%", 
+      top: "50%",
+      transform: "translateY(-50%)", // سنترة رأسية
+      width: "220px",
+      height: "auto",
+      zIndex: "5",
+      filter: "drop-shadow(0px 10px 20px rgba(0,0,0,0.2))" // شادو للصورة نفسها
+    }} 
+  />
+</div>
      
 
 <div style={{display:"flex",justifyContent:"space-between"}}>

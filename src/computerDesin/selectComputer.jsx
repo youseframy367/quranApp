@@ -7,45 +7,41 @@ import AhdesImg from "./imgComputer/Group 80(1).png";
 import votart from "./imgComputer/Vector 1(1).png";
 import ComponentRepeatCom from "../ncomponntRepeat";
 
-// بيانات الخيارات
+// بيانات الخيارات - تعديل الـ paths لترتبط بصفحة اليوتيوب
 const optionsList = [
   {
     name: "القرآن الكريم",
     image: quranImg,
-    path: "/chiohCom",
+    path: "/chiohCom", // دي غالباً صفحة المشايخ اللي عندك
   },
   {
     name: "دروس دينيه",
     image: listImg,
-    path: "/chiohSelct",
+    path: "/youtubeSelect/lessons", // لاحظ بعتنا كلمة lessons
   },
   {
     name: "ابتهالات",
     image: lisningImg,
-    path: "/apthlatSelct",
+    path: "/youtubeSelect/abtehalat", // بعتنا abtehalat
   },
   {
     name: "أحاديث نبويه",
     image: AhdesImg,
-    path: "/azkarSelct",
+    path: "/azkarSelct", 
   },
-
- {
+  {
     name: "من اذاعه القرءان الكريم",
     image: quranImg,
-    path: "/azaheSelct",
+    path: "/youtubeSelect/izahe", // بعتنا izahe
   },
   {
     name: "تنميه هادفه",
     image: AhdesImg,
-    path: "/tanmia",
+    path: "/youtubeSelect/tanmia", // بعتنا tanmia
   },
-
-
-
-
-
 ];
+
+// ... الاستيرادات كما هي ...
 
 export default function AllOptionCom() {
   const navigate = useNavigate();
@@ -58,15 +54,19 @@ export default function AllOptionCom() {
         width: "100%",
         maxWidth: "370px",
         listStyle: "none",
-boxShadow: "15px 0px 25px #004B40",
-    overflow: "hidden",
-        borderRadius: "23px", // الحواف
-        zIndex:"100"
+        boxShadow: "15px 0px 25px #004B40",
+        overflow: "hidden",
+        borderRadius: "23px",
+        zIndex: "100"
       }}
       onClick={() => navigate(item.path)}
     >
-      <ComponentRepeatCom nameContent={item.name} imgContent={item.image}         style={{ margin: "0px  ", width: "98%" }}
-/>
+      {/* التعديل هنا: غيرنا imgContent لـ rightContent */}
+      <ComponentRepeatCom 
+        nameContent={item.name} 
+        rightContent={item.image} // بعتنا مسار الصورة هنا
+        style={{ margin: "0px", width: "98%" }}
+      />
     </li>
   ));
 
@@ -74,33 +74,29 @@ boxShadow: "15px 0px 25px #004B40",
     <div
       style={{
         display: "flex",
-        justifyContent:"center",
+        justifyContent: "center",
         padding: "35px 0px",
         width: "100%",
-      margin:"0px",
-          backgroundImage:
-          "linear-gradient(to bottom, #0B4F47, #0067541C, #AAD4C8)",
+        margin: "0px",
+        backgroundImage: "linear-gradient(to bottom, #0B4F47, #0067541C, #AAD4C8)",
         overflowX: "hidden",
         overflowY: "auto",
-        height:"auto"
+        minHeight: "100vh" // خليها minHeight عشان الـ gradient يغطي الصفحة كلها
       }}
     >
-      
       <ul
-  style={{
-    display: "grid",
-    gridTemplateColumns: "repeat(2, 1fr)", // عمودين
-gap:"130px"  ,                   // مسافة بين العناصر
-    padding: 0,
-    margin: 0,
-    width:"100%",
-   width: "1000px",                     // تتحكم في العرض الكلي
-  }}
->
-  {getOptions}
-</ul>
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(2, 1fr)", 
+          gap: "130px",
+          padding: 0,
+          margin: 0,
+          width: "1000px",
+        }}
+      >
+        {getOptions}
+      </ul>
       <img src={votart} alt="Decoration" className="bottom" />
-
     </div>
   );
 }
